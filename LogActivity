@@ -1,0 +1,18 @@
+<?php
+add_hook('LogActivity', 1, function ($vars) {
+	$url = "https://hook";
+    $payload = array(
+        "description" => $vars["description"],
+        "user"  => $vars["user"],
+        "user_id"      => $vars["userid"],
+		    "ip_address"	=> $vars["ipaddress"]
+    );
+    $opts = array("http" => array(
+        "method"  => "POST",
+        "header"  => "Content-type: application/json",
+        "content" => json_encode($payload)
+    ));
+    $context = stream_context_create($opts);
+    $result  = file_get_contents($url, false, $context);
+});
+?>
