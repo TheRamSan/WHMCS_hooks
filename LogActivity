@@ -5,7 +5,7 @@ add_hook('LogActivity', 1, function ($vars) {
         "description" => $vars["description"],
         "user"  => $vars["user"],
         "user_id"      => $vars["userid"],
-		    "ip_address"	=> $vars["ipaddress"]
+	"ip_address"	=> $vars["ipaddress"]
     );
     $opts = array("http" => array(
         "method"  => "POST",
