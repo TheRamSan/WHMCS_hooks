@@ -1,11 +1,12 @@
 <?php
 add_hook('LogActivity', 1, function ($vars) {
-	$url = "https://hook";
+    if (strpos($vars["description"],'Email Sending Failed') !== false){
+    $url = "https://hook.integromat.com/5kzry5g1pacdm38b2ijoxcsh5kzcvp41";
     $payload = array(
         "description" => $vars["description"],
         "user"  => $vars["user"],
         "user_id"      => $vars["userid"],
-	"ip_address"	=> $vars["ipaddress"]
+    "ip_address"    => $vars["ipaddress"]
     );
     $opts = array("http" => array(
         "method"  => "POST",
@@ -14,5 +15,6 @@ add_hook('LogActivity', 1, function ($vars) {
     ));
     $context = stream_context_create($opts);
     $result  = file_get_contents($url, false, $context);
+    }
 });
 ?>
